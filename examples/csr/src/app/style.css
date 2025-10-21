@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+:root {
+  --ui-primary: var(--color-green-500);
+  --ui-error: var(--color-red-500);
+}
+
+html {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+div#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -1,0 +1,132 @@
+package vuefes:component;
+
+interface vue-host {
+    /// Abstraction that represents a DOM Node
+    resource node {
+        /// Get a platform DOM instance by ID
+        get-by-id: static func(id: string) -> option<platform-dom>;
+
+        /// Get the host-specific node ID (not DOM related)
+        id: func() -> string;
+
+        /// Get the nth child of this node
+        nth-child: func(nth: u32) -> option<node>;
+
+        /// Get the first child of this node
+        child: func() -> option<node>;
+
+        /// Get the next child of this node
+        next: func() -> option<node>;
+
+        /// Set the textual content of this node
+        set-text: func(txt: string);
+
+        /// Set the style of this node
+        set-style: func(props: list<tuple<string, string>>);
+    }
+
+    /// Value of a ref()
+    variant ref-value {
+        /// Simple numeric value
+        number(s32),
+        /// Simple string value
+        str(string),
+        /// Object, encoded as JSON
+        object-json(string),
+        /// Null
+        null,
+        /// Undefined
+        undefined,
+    }
+
+    /// Abstraction for refs that are created
+    resource ref {
+        /// Get the ID of this ref
+        id: func() -> string;
+
+        /// Get the value currently contained by this ref
+        get-value: func() -> option<ref-value>;
+
+        /// Set the value of this ref
+        set-value: func(v: ref-value);
+    }
+
+    /// Errors that can happen when doing DOM calls via the platform
+    variant platform-dom-error {
+        unexpected(string),
+    }
+
+    /// Abstraction that represents the DOM, as exposed by the platform
+    resource platform-dom {
+       // TODO: figure out state mgmt
+
+        /// Get a platform DOM instance by ID
+        get-by-id: static func(id: string) -> option<platform-dom>;
+
+        /// Create a DOM node
+        create-node: static func(html: string) -> result<node, platform-dom-error>;
+
+        /// Create a dynamic ref
+        create-ref: static func(value: ref-value) -> result<ref, platform-dom-error>;
+
+        /// Delegate events received by the outside world
+        delegate-events: static func(event: string) -> result<_, platform-dom-error>;
+
+        /// Set event IDs for nodes
+        set-node-event-id: static func(node-id: string, event-id: u32);
+
+        /// Get a node related to this platform
+        get-node-by-id: static func(node-id: string) -> option<node>;
+
+        /// Get a ref related to this platform
+        get-ref-by-id: static func(ref-id: string) -> option<ref>;
+
+        /// Get the ID of this platform dom
+        id: func() -> string;
+
+    }
+}
+
+/// This interface encapsulates the required interfaces to make
+/// a renderable component
+interface vue-render {
+    use vue-host.{platform-dom};
+
+    /// Errors that can occur during rendering
+    variant render-error {
+        unexpected(string),
+    }
+
+    /// Render the component, using a platform-provided DOM implementation
+    render: func() -> result<_, render-error>;
+}
+
+/// Interface that is fulfilled by components that can handle
+/// events, normally after requesting that they are delegated
+/// by the platform (see `platform-dom` available in `component-render` )
+interface vue-event-handler {
+    /// Errors that can occur during event processing
+    variant event-processing-error {
+        unexpected(string),
+    }
+
+    /// Process a delegated event
+    process-delegated-event: func(
+        event: string,
+        event-id: u32,
+        payload-json: string
+    ) -> result<_, event-processing-error>;
+}
+
+/// Embeddings of platforms that can host vue components
+world host {
+    export vue-host;
+}
+
+/// Components that are Vue components
+world component {
+    import vue-host;
+
+    export vue-render;
+    export vue-event-handler;
+}

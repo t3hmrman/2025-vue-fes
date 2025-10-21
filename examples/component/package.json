@@ -1,0 +1,31 @@
+{
+    "name": "component",
+    "version": "0.1.0",
+    "description": "Example of building Vue components straight to WebAssembly, in a fine-grained manner",
+    "type": "module",
+    "scripts": {
+        "fetch:wit": "wkg wit fetch",
+        "build:ts": "rolldown -c component.rolldown.config.ts",
+        "build:component": "pnpm build:ts && jco componentize --disable all --enable stdio -w wit -n component -o dist/wasm/component.wasm dist/wasm/component.js",
+        "build": "pnpm build:component",
+        "transpile": "jco transpile dist/wasm/component.wasm -o dist/transpiled --instantiation=async",
+        "all": "pnpm fetch:wit && pnpm build:component && pnpm transpile",
+        "serve": "wasmtime serve -Scli dist/wasm/component.wasm",
+        "serve:prebuilt": "wasmtime serve -Scli prebuilt.wasm",
+        "demo": "vite -c demo.vite.config.ts"
+    },
+    "dependencies": {
+        "@bytecodealliance/preview2-shim": "^0.17.4",
+        "@nuxt/ui": "catalog:",
+        "tailwindcss": "catalog:",
+        "vue": "catalog:",
+        "vue-router": "catalog:"
+    },
+    "devDependencies": {
+        "@bytecodealliance/jco": "catalog:",
+        "@tailwindcss/vite": "catalog:",
+        "rolldown": "catalog:",
+        "rolldown-vite": "catalog:",
+        "vite": "npm:rolldown-vite@^7.1.19"
+    }
+}

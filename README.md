@@ -17,12 +17,11 @@ and [WebAssembly Interface Types][wit].
 There are multiple projects in this repository, demonstrating different ways of using Vue
 in the world of WebAssembly, in increasing complexity and power:
 
-| Project      | Folder                | Description                                           |
-|--------------|-----------------------|-------------------------------------------------------|
-| CSR          | `examples/csr`        | Client Side Rendered Vue with WebAssembly             |
-| SSR (simple) | `examples/ssr-simple` | Server Side Rendered Vue with builtins                |
-| SSR (Nuxt)   | `examples/ssr-nuxt`   | Server Side Rendered Vue via Nuxt                     |
-| Component    | `examples/component`  | Single component rendering with on flexible platforms |
+| Project   | Folder               | Description                                           |
+|-----------|----------------------|-------------------------------------------------------|
+| CSR       | `examples/csr`       | Client Side Rendered Vue with WebAssembly             |
+| SSR       | `examples/ssr`       | Server Side Rendered Vue with builtins                |
+| Component | `examples/component` | Single component rendering with on flexible platforms |
 
 While deploying client side rendered Vue is as simple as deploying a web page, server side rendered
 Vue requires more integration -- building a WebAssembly component *in Javascript* and doing some
@@ -33,7 +32,7 @@ more bundling, integrating into existing frameworks as they support it.
 There are many projects (other than [Vue][vue] and it's ecosystem, of course!) that make it easier to
 write and work with Javascript in WebAssembly:
 
-- [StarlingMonkey][sm] is a WebAssembly-ready Javascript Runtime stewarded by the Bytecode Alliance, based on [SpiderMonkey][spidermonkey]
+- [StarlingMonkey][sm] is a WebAssembly-ready Javascript engine stewarded by the Bytecode Alliance, based on [SpiderMonkey][spidermonkey]
 - [componentize-js][componentize-js] turns Javascript into WebAssembly components, working with WIT interfaces
 - [jco][jco] is a JS WebAssembly ecosystem multi-tool which also enables transpiling WebAssembly components to run in JS environments (NodeJS, Browser)
 
@@ -54,12 +53,17 @@ For a quick guide into the WebAssembly JS ecosystem:
 
 ## Dependencies
 
-The code in this repository depends mostly on the typical Javascript stack:
+The code in this repository depends both on the Javascript stack and upstream WebAssembly tooling:
 
-| Dependency | Description      |
-|------------|------------------|
-| `node`     | [NodeJS][nodejs] |
-| `pnpm`     | [PNPM][pnpm]     |
+| Dependency | Description                                                                                                  |
+|------------|--------------------------------------------------------------------------------------------------------------|
+| `node`     | [NodeJS][nodejs] is an Javascript runtime                                                                    |
+| `pnpm`     | [PNPM][pnpm] is an efficient Javascript ecosystme package manager                                            |
+| `wasmtime` | [Wasmtime][wasmtime] is a WebAssembly runtime stewarded by the Bytecode Alliance ([Github][github-wasmtime]) |
+| `wkg`      | [wkg][wkg] is a package manager for WebAssembly Interface Type (`.wit`) files                                |
 
 [nodejs]: https://nodejs.org
 [pnpm]: https://pnpm.io/
+[wasmtime]: https://wasmtime.dev/
+[github-wasmtime]: https://github.com/bytecodealliance/wasmtime
+[wkg]: https://github.com/bytecodealliance/wasm-pkg-tools

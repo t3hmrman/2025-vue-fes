@@ -1,0 +1,29 @@
+{
+    "name": "csr",
+    "version": "0.1.0",
+    "description": "Example of serving CSR Vue with WebAssembly",
+    "type": "module",
+    "scripts": {
+        "fetch:wit": "wkg wit fetch",
+        "build:client": "vite build -c client.vite.config.ts",
+        "build:ts": "tsdown -c component.tsdown.config.ts",
+        "build:component": "pnpm build:ts && jco componentize -w wit -o dist/wasm/component.wasm dist/wasm/component.js",
+        "build": "pnpm build:client && pnpm build:component",
+        "serve": "wasmtime serve -Scli dist/wasm/component.wasm",
+        "serve:prebuilt": "wasmtime serve -Scli prebuilt.wasm"
+    },
+    "dependencies": {
+        "@nuxt/ui": "^4.1.0",
+        "tailwindcss": "^4.1.16",
+        "vue": "catalog:",
+        "vue-router": "^4.6.3"
+    },
+    "devDependencies": {
+        "@bytecodealliance/jco": "catalog:",
+        "@tailwindcss/vite": "^4.1.16",
+        "rolldown-vite": "catalog:",
+        "tsdown": "catalog:",
+        "vite": "npm:rolldown-vite@^7.1.19",
+        "vite-plugin-singlefile": "catalog:"
+    }
+}

@@ -1,0 +1,11 @@
+package vuefes:ssr;
+
+world component {
+    import wasi:cli/environment@0.2.3;
+
+    // While newer versions of wasi:http are out, we're using 0.2.3 here
+    // due to limitations of fetch() support in StarlingMonkey (for now)
+    //
+    // see: https://github.com/bytecodealliance/ComponentizeJS/issues/313
+    export wasi:http/incoming-handler@0.2.3;
+}

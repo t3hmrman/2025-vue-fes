@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VueJS WebAssembly (Built-in Vue) SSR Example</title>
+    <link rel="stylesheet" href="/app.css" />
+  </head>
+  <style>
+    html {
+      margin: 0;
+      height: 100%;
+    }
+    
+    body {
+      min-height: 100%;
+    }
+    
+    div#app {
+      display: flex;
+      flex-direction: column;
+    align-items: center;
+    }
+  </style>
+  <body>
+    <div id="app">__APP_HTML__</div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
