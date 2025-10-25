@@ -38,7 +38,7 @@ You can run the application instantly by using the [`prebuilt.wasm`](./prebuilt.
 with any WebAssembly runtime that supports [WebAssembly components (the Component Model)][wasm-components].
 
 ```
-pnpm serve:prebuilt
+pnpm demo:prebuilt
 ```
 
 Since the WebAssembly component in this folder is built to be all-encompassign (all application assets are inlined),
