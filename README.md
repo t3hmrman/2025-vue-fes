@@ -62,6 +62,21 @@ The code in this repository depends both on the Javascript stack and upstream We
 | `wasmtime` | [Wasmtime][wasmtime] is a WebAssembly runtime stewarded by the Bytecode Alliance ([Github][github-wasmtime]) |
 | `wkg`      | [wkg][wkg] is a package manager for WebAssembly Interface Type (`.wit`) files                                |
 
+If you have the [Rust toolchain][rust-toolchain] installed, you can run the following:
+
+```console
+cargo install wasmtime-cli
+cargo install wkg
+```
+
+If you have [`cargo binstall`](https://github.com/cargo-bins/cargo-binstall) installed, even better:
+
+```console
+cargo binstall wasmtime-cli
+cargo binstall wkg
+```
+
+[rust-toolchain]: https://rust-lang.org/tools/install/
 [nodejs]: https://nodejs.org
 [pnpm]: https://pnpm.io/
 [wasmtime]: https://wasmtime.dev/
